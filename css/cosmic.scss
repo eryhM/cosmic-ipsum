@@ -1,0 +1,75 @@
+// Colors
+$cosmicDark: #040d1e;
+$cosmicLight: #ededed;
+
+//Sizes
+$bUnit: 16px;
+
+html
+{
+	font-size: $bUnit;
+	color: $cosmicLight;
+}
+
+body
+{
+	position: relative;
+	background: $cosmicDark;
+	font-family: 'Open Sans', sans-serif;
+	color: $cosmicLight;
+}
+
+header
+{
+	margin: $bUnit 0 $bUnit;
+	padding: 0 0 $bUnit;
+	border-bottom: 1px solid $cosmicLight;
+
+	h1, h4
+	{
+		text-align: center;
+	}
+}
+
+.content
+{
+	.btn
+	{
+		cursor: pointer;
+	}
+
+	hr
+	{
+		margin: $bUnit 0 0;
+		padding: $bUnit 0 0;
+		border-top: 1px solid $cosmicLight;
+	}
+
+	#result
+	{
+		margin: $bUnit * 2 0 0;
+
+		p span.word:hover
+		{
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
+}
+
+footer
+{
+	margin: $bUnit 0 0;
+	padding: $bUnit 0 0;
+	border-top: 1px solid $cosmicLight;
+
+	a, a:hover
+	{
+		color: $cosmicLight;
+	}
+
+	a.ml-auto
+	{
+		text-align: right;
+	}
+}

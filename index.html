@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Cosmic Ipsum</title>
+		<meta name="description" content="Cosmic Ipsum, a Lorem Ipsum from outer space.">
+		<meta name="keywords" content="cosmic, lorem, ipsum, outer, space, generator">
+		<link rel="icon" type="image/png" href="./img/favicon.png" />
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Popper & Bootstrap 4 (Beta) -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+		<!-- ClipboardJS -->
+		<script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" href="css/cosmic.css">
+	</head>
+<body class="container">
+	<header class="row">
+		<h1 class="col-12">COSMIC IPSUM</h1>
+		<h4	class="col-12">A lorem ipsum from outer space</h4>
+	</header>
+	<div class="row content">
+		<form class="col-12 col-md-6 col-lg-4">
+			<div class="form-group">
+				<label for="paragraphs">Paragraphs</label>
+				<input type="number" class="form-control" id="paragraphs" aria-describedby="paragraphsHelp" min="1" value="1">
+				<small id="paragraphsHelp" class="form-text text-muted">The number of paragraphs you want.</small>
+			</div>
+			<div class="form-check">
+				<label for="repeat" class="form-check-label">
+					<input type="checkbox" class="form-check-input" id="repeat">
+					Repeat?
+				</label>
+			</div>
+			<div class="form-check">
+				<label for="cosmicStart" class="form-check-label">
+					<input type="checkbox" class="form-check-input" id="cosmicStart" checked>
+					Start with Cosmic ipsum..
+				</label>
+			</div>
+			<button type="submit" class="btn btn-primary" id="submit">Generate</button>&nbsp;or&nbsp;
+			<button type="submit" class="btn btn-primary" data-clipboard-target="#result" id="copy">Copy to clipboard</button>
+			<hr>
+			<a href="https://github.com/eryhm/cosmic-ipsum/" target="_blank">Get the jQuery Plugin</a>
+			<hr>
+			<fieldset>
+				<a href="https://en.wikipedia.org/w/index.php?search=Glossary_of_astronomy" target="_blank" id="wiki" aria-describedby="wikiHelp">Search on Wikipedia: Glossary of astronomy</a>
+				<small id="wikiHelp" class="form-text text-muted">Click any word for its wikipedia shortcut.</small>
+			</fieldset>
+		</form>
+		<div id="result" class="col-12 col-md-6 col-lg-8">
+			<p></p>
+		</div>
+	</div>
+	<footer class="row">
+		<a class="col" href="https://raw.githubusercontent.com/eryhm/cosmic-ipsum/master/dist/cosmic-ipsum.js" target="_blank">View source on GitHub</a>
+		<a class="col ml-auto" href="https://github.com/eryhM" target="_blank">By Mhyre</a></p>
+	</footer>
+<script type="text/javascript">
+/*
+* This page makes use of an altered version
+* of the Cosmic Ipsum jQuery Plugin in order
+* to add different features to the page itself.
+*
+* See https://raw.githubusercontent.com/eryhm/cosmic-ipsum/master/dist/cosmic-ipsum.js
+* for the original plugin.
+*/
+$(document).ready(function()
+{
+	let p = $('#result p');
+
+	//ClipboardJS
+	let clipboard = new Clipboard('#copy');
+
+	clipboard.on('success', function(e)
+	{
+		$('#copy').html('Success! :)');
+		e.clearSelection();
+	});
+
+	//The full bank of astronomy words.
+	let wordBank =
+	[
+		"albedo",
+		"Alpha Centauri",
+		"apastron",
+		"aperature",
+		"aphelion",
+		"apogee",
+		"asterism",
+		"asteroid",
+		"astronaut",
+		"astronomer",
+		"astronomical unit",
+		"astronomy",
+		"axial tilt",
+		"azimuth",
+		"background radiation",
+		"Bailey's beads",
+		"big bang theory",
+		"binary star",
+		"black body",
+		"black hole",
+		"bolometer",
+		"celestial",
+		"celestial coordinates",
+		"celestial equator",
+		"circumpolar",
+		"cislunar",
+		"cluster",
+		"comet",
+		"conjunction",
+		"constellation",
+		"coriolis force",
+		"cosmic rays",
+		"corona",
+		"cosmology",
+		"cosmonaut",
+		"cosmos",
+		"crater",
+		"crescent moon",
+		"culmination",
+		"dark matter",
+		"day",
+		"declination",
+		"deep space",
+		"Deneb",
+		"density",
+		"docking",
+		"Doppler shift",
+		"double star",
+		"Drake equation",
+		"dust",
+		"dwarf planet",
+		"dwarf star",
+		"Earth",
+		"Earthshine",
+		"eccentricity",
+		"eclipse",
+		"ecliptic",
+		"elliptical orbit",
+		"ephemeris",
+		"equinox",
+		"escape velocity",
+		"event horizon",
+		"exoplanet",
+		"extragalactic",
+		"falling star",
+		"flare",
+		"flyby",
+		"free fall",
+		"full moon",
+		"galaxy",
+		"gamma ray",
+		"gas giant",
+		"gegenschein",
+		"geostationary",
+		"geosynchronous",
+		"gibbous moon",
+		"globular cluster",
+		"gravitation",
+		"gravitational constant",
+		"gravitational lens",
+		"gravity",
+		"half moon",
+		"heliocentric",
+		"hydrogen",
+		"helium",
+		"H-R diagram",
+		"Hubble telescope",
+		"Hubble's law",
+		"hyperbolic orbit",
+		"hypernova",
+		"ice giant",
+		"inclination",
+		"inertia",
+		"inferior planets",
+		"inner planets",
+		"interstellar",
+		"interstellar dust",
+		"ionosphere",
+		"Jupiter",
+		"Kepler's laws",
+		"kiloparsec",
+		"Kirkwood gaps",
+		"Kuiper belt",
+		"Lagrange points",
+		"lens",
+		"libration",
+		"light-year",
+		"limb",
+		"local arm",
+		"local group",
+		"lunar",
+		"magnitude",
+		"Lunar mare",
+		"Mars",
+		"mass",
+		"Mercury",
+		"meridian",
+		"Messier object",
+		"meteor",
+		"meteor shower",
+		"meteorite",
+		"meteoroid",
+		"Milky Way",
+		"minor planet",
+		"Mir",
+		"moon",
+		"muttnik",
+		"nadir",
+		"NASA",
+		"nebula",
+		"Neptune",
+		"neutron star",
+		"new moon",
+		"north star",
+		"nova",
+		"observatory",
+		"occultation",
+		"Oort cloud",
+		"opposition",
+		"orbit",
+		"orbital eccentricity",
+		"orbital inclination",
+		"outer planets",
+		"parallax",
+		"parsec",
+		"partial eclipse",
+		"penumbra",
+		"perigee",
+		"perihelion",
+		"perturbation",
+		"phase",
+		"plane of the ecliptic",
+		"planet",
+		"planetary nebula",
+		"planetoid",
+		"planisphere",
+		"Pluto",
+		"pole star",
+		"precession",
+		"probe",
+		"pulsar",
+		"quarter moon",
+		"quasar",
+		"radiant",
+		"radiation",
+		"red dwarf",
+		"red giant star",
+		"red shift",
+		"revolve",
+		"retrograde",
+		"right ascension",
+		"rings",
+		"Roche limit",
+		"rocket",
+		"satellite",
+		"Saturn",
+		"scientific notation",
+		"scintillation",
+		"seeing",
+		"shooting star",
+		"solar",
+		"sidereal",
+		"singularity",
+		"sky",
+		"solar",
+		"solar system",
+		"solar wind",
+		"solstice",
+		"space",
+		"space exploration",
+		"space station",
+		"spectroscope",
+		"spectrum",
+		"Sputnik",
+		"star",
+		"starlight",
+		"sun",
+		"sunspot",
+		"superior planets",
+		"supernova",
+		"synodic",
+		"syzygy",
+		"telemetry",
+		"telescope",
+		"terminator",
+		"terrestrial",
+		"total eclipse",
+		"totality",
+		"transit",
+		"translunar",
+		"transneptunians",
+		"transparency",
+		"twinkling",
+		"umbra",
+		"universe",
+		"Uranus",
+		"vacuum",
+		"Van Allen belt",
+		"variable star",
+		"Venus",
+		"vernal equinox",
+		"visual magnitude",
+		"waning",
+		"wavelength",
+		"waxing",
+		"weightlessness",
+		"white dwarf",
+		"white giant",
+		"wormhole",
+		"x-rays",
+		"yellow dwarf",
+		"zenith",
+		"zodiac"
+	];
+
+	let result = '';
+
+	for(let word in wordBank)
+	{
+		wordBank[word] = '<span class="word">' + wordBank[word] + '</span>';
+	}
+
+	function randomize()
+	{
+		for(let i = wordBank.length; i; i--)
+		{
+			let j = Math.floor(Math.random() * i);
+			[wordBank[i - 1], wordBank[j]] = [wordBank[j], wordBank[i - 1]];
+		}
+	}
+
+	function generate(x, repeat, cosmicStart)
+	{
+		result = '';
+		let paragraph = '';
+
+		randomize();
+
+		paragraph = wordBank.slice(0, 48).join(' ');
+		
+		for(let i = 1; i <= x; i++)
+		{
+			if(!cosmicStart || i > 1)
+				paragraph = '<span class="word">' + paragraph.charAt(19).toUpperCase() + paragraph.slice(20);
+
+			result += paragraph;
+
+			if(i != x)
+				result += '<br><br>';
+
+			if(!repeat)
+			{
+				randomize();
+				paragraph = wordBank.slice(0, 48).join(' ');
+			}
+		}
+
+		if(cosmicStart)
+			result = 'Cosmic ipsum ' + result;
+
+		p.html(result);
+	}
+
+	//Copy to clipboard button
+	$('#copy').click(function(e)
+	{
+		e.preventDefault();
+	});
+
+	//Generate button
+	$('#submit').click(function(e)
+	{
+		e.preventDefault();
+		generate($('#paragraphs').val(), $('#repeat').is(':checked'), $('#cosmicStart').is(':checked'));
+		$('#copy').html('Copy to clipboard');
+	});
+
+	//Wikipedia links
+	p.on('click', '.word', function(e)
+	{
+		$('#wiki').html('Search on Wikipedia: ' + $(this).text()).attr('href', 'https://en.wikipedia.org/w/index.php?search=' + $(this).text().split(' ').join('_'));
+	});
+
+	generate(1, false, true);
+});
+</script>
+</body>
+</html>
